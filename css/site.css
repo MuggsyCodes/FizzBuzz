@@ -63,3 +63,6 @@ word-wrap: break-word;
 main>.container {
     padding: 60px 15px 0;
 }
+
+
+/*<td style="word-wrap: break-word;min-width: 160px;max-width: 160px;">long long comments</td>*/
