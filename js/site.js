@@ -18,8 +18,10 @@ function getValues(){
     if(Number.isInteger(first_number) && Number.isInteger(last_number)){
         let numbers = generateNumbers(first_number, last_number);
         //call displayNumbers
-        let fbArray = fizzBuzz(numbers);
+        //let fbArray = fizzBuzz(numbers);
         //write the data to the page 
+        //let fbArray = anotherFizz(3,5);
+        let fbArray = FizzBuzzC(3,5);
         displayValues(fbArray)
 
     } else {
@@ -76,13 +78,56 @@ function fizzBuzz(numbers){
 }
 
 
-function anotherFizz(){
+function anotherFizz(FizzValue, BuzzValue){
     
-    let returnArry = [];
+    let returnArray = [];
+    let Fizz = false;
+    let Buzz = false;
 
-    
+    for (let i = 1; i <= 100; i++) {
 
-    return returnArry
+        Fizz = i % FizzValue == 0; // reset to true if modulo is 0
+        Buzz = i % BuzzValue == 0;
+
+      switch (true) {
+          case Fizz && Buzz: {
+              returnArray.push("FizzBuzz");
+              break;
+          }
+          case Fizz: {
+              returnArray.push("Fizz");
+              break;
+          }
+          case Buzz: {
+              returnArray.push("Buzz");
+              break;
+          }
+          //if none of this happens 
+          default: {
+              returnArray.push(i);
+              break;
+          }
+      }
+        
+    }
+
+    return returnArray
+}
+
+function FizzBuzzC(FizzValue, BuzzValue){
+    let returnArray = [];
+
+    for (let i = 1; i <= 100; i++) {
+
+        //using ternary ? operator
+        //Note: an empty string evaluates to false
+        //Note: a variable with any value evaluates to true
+        let value = ((i % FizzValue == 0 ? 'Fizz': '') + (i % BuzzValue == 0 ? 'Buzz': '') || i );
+        returnArray.push(value);
+        
+    }
+
+    return returnArray;
 }
 
 // use the HTML Table thing
