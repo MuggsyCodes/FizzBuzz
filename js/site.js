@@ -18,7 +18,9 @@ function getValues(){
     if(Number.isInteger(first_number) && Number.isInteger(last_number)){
         let numbers = generateNumbers(first_number, last_number);
         //call displayNumbers
-        displayNumbers(numbers);
+        let fbArray = fizzBuzz(numbers);
+        //write the data to the page 
+        displayValues(fbArray)
 
     } else {
         alert("You must enter integers");
@@ -46,36 +48,86 @@ function generateNumbers(start_val, end_val){
 //display the even numbers in bold
 //display or view function
 //pass in an array
-function displayNumbers(numbers){
+
+function fizzBuzz(numbers){
     //input is array of ints
     //create single table row with table data entry of either a word or the int value
 
-    let fb_rows = "";
     var i;
-    var number;
+    var fbArrayVal = [];
     for (i=1; i <= numbers.length; i++){
-    //console.log(i);
-    if (i%3 ==0 && i%5 ==0) {
-        number = "FizzBuzz";
-        fb_rows += `<tr><td>${number}</td></tr>`;
-        //console.log("FizzBuzz")
+    	if (i%3 ==0 && i%5 ==0) {
+          fbArrayVal.push("FizzBuzz");
+       }
+        else if (i % 3 == 0) {
+            fbArrayVal.push("Fizz");
+            }
+        else if (i%5 == 0){
+            fbArrayVal.push("Buzz");
+        }
+        else {
+            fbArrayVal.push(i);
+    
+        }
+    }
+    // end for loop
+    return fbArrayVal;
+    
+}
+
+
+function anotherFizz(){
+    
+    let returnArry = [];
+
+    
+
+    return returnArry
+}
+
+// use the HTML Table thing
+function displayValues(fbArray){
+
+    //get the table body element from the page
+        //<tbody id="results">
+            //inner HTML stuff goes here
+        //</tbody>
+    let tableBody = document.getElementById("results");
+
+    //get the template row
+    let templateRow = document.getElementById("fbTemplate");
+
+    //clear table first
+    tableBody.innerHTML = "";
+
+    // add all the rows to the table
+    // loop over the array and display it
+    for (let index = 0; index < fbArray.length; index+=5){
+        //copying the template into memory in order to modify 
+        let tableRow = document.importNode(templateRow.content, true);
+
+        //grab all the td tags / values
+        let rowCols = tableRow.querySelectorAll("td"); //an HTML fragment ??
+
+        //assign a class based on the value of the array - if it's a number, there's no associated class, so no change
+        rowCols[0].classList.add(fbArray[index]);
+        rowCols[0].textContent = fbArray[index]; //this is the stored value, number, fizz, buzz or fizzbuzz
+
+        rowCols[1].classList.add(fbArray[index+1]);
+        rowCols[1].textContent = fbArray[index+1];
+
+        rowCols[2].classList.add(fbArray[index+2]);
+        rowCols[2].textContent = fbArray[index+2];
+
+        rowCols[3].classList.add(fbArray[index+3]);
+        rowCols[3].textContent = fbArray[index+3];
+
+        rowCols[4].classList.add(fbArray[index+4]);
+        rowCols[4].textContent = fbArray[index+4];
+
+        tableBody.appendChild(tableRow);
+
     }
 
-    else if (i % 3 == 0) {
-        number = "Fizz";
-        fb_rows += `<div class="col">${number}</div>`;
-        //fb_rows += `<tr><td>${number}</td></tr>`;
-    }
-    else if (i%5 == 0){
-        number = "Buzz";
-        fb_rows += `<div class="col">${number}</div>`;
-        //fb_rows += `<tr><td>${number}</td></tr>`;
-    }
-    else {
-        number = i;
-        fb_rows += `<div class="col">${number}</div>`;
-        //fb_rows += `<tr><td>${number}</td></tr>`;  }
-        }
-    // end for loop
-    document.getElementById("results").innerHTML = fb_rows;
+
 }
